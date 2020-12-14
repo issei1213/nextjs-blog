@@ -2,19 +2,11 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
+import Link from "next/link";
+import Date from "../components/date";
 
 // 静的ジェレネータ
-// export async function getStaticProps() {
-//   const allPostsData = getSortedPostsData();
-//   return {
-//     props: {
-//       allPostsData,
-//     },
-//   };
-// }
-
-// SSR
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -22,6 +14,16 @@ export async function getServerSideProps() {
     },
   };
 }
+
+// SSR
+// export async function getServerSideProps() {
+//   const allPostsData = getSortedPostsData();
+//   return {
+//     props: {
+//       allPostsData,
+//     },
+//   };
+// }
 
 export default function Home({ allPostsData }) {
   return (
@@ -40,11 +42,13 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>
+                <a>{title}</a>
+              </Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
