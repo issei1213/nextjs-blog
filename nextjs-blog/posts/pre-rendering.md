@@ -1,5 +1,5 @@
 ---
-title: "Two Forms of Pre-rendering リゼロ２期始まるよ"
+title: "レムの青髪"
 date: "2020-07-10"
 ---
 
