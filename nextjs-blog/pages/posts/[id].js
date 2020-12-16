@@ -23,7 +23,7 @@ export default function Post({ postData }) {
 
 // 動的ルーティングするファイルをここで取得する
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   return {
     paths,
     fallback: false,
