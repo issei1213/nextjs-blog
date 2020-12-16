@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.css";
@@ -6,14 +7,17 @@ import Link from "next/link";
 import Date from "../components/date";
 
 // 静的ジェレネータ
-export async function getStaticProps() {
+// JS
+// export async function getStaticProps() {
+// TS
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
 
 // SSR
 // export async function getServerSideProps() {
@@ -25,7 +29,17 @@ export async function getStaticProps() {
 //   };
 // }
 
-export default function Home({ allPostsData }) {
+// JS
+// export default function Home({ allPostsData }) {
+// TS
+type Props = {
+  allPostsData: {
+    id: string;
+    title: string;
+    date: string;
+  }[];
+};
+export default function Home({ allPostsData }: Props) {
   return (
     <Layout home>
       <Head>
